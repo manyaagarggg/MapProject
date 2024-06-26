@@ -1,36 +1,101 @@
-<!DOCTYPE html>
+<!doctype html>
+<!--
+ @license
+ Copyright 2019 Google LLC. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+-->
+<html>
+  <head>
+    <title>Add Map</title>
+    <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> -->
+
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+
+    <!-- prettier-ignore -->
+    <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+        ({key: "AIzaSyDL2lbrWFabdyfnxh3GEowbSkw62IRzRHk", v: "weekly"});</script>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQ6jVr0lcexPTfwt4VoNh3lSq83ygfu_4&libraries=places"></script>
+    
 </head>
 <body onload="initMap()">
     <h1 class="text-center">Directions Route Finder</h1>
     <br><br>
     <div class="container">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Source Location" id="Source">
+            <input type="text" class="form-control" placeholder="Source Location" id="source">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Destination Location" id="Destination">
+            <input type="text" class="form-control" placeholder="Destination Location" id="dest">
         </div>
-        <button class="btn btn-primary" onclick="GetRoute()">Get Directions</button>
+        <button class="btn btn-primary" onclick="calcRoute()">Get Directions</button>
         <div id="map" style="height: 500px; width: 100%;"></div>
     </div>
 </body>
 <script>
-    let map
+    // let map, directionService, directionRenderer;
+    // let sourceAutoComplete, desAutoComplete; 
+    var map;
+    var directionsService;
+    var directionsRenderer;
+    var sourceAutocomplete;
+    var destAutocomplete;
+    
     function initMap(){
         map= new google.maps.Map(document.getElementById('map'),{
-            center: {lat: 37.7749, lng: -122.4194},
-            zoom: 13
-        })
+            center: {lat: 29.1492, lng: 75.7217},
+            zoom: 5,
+        });
         google.maps.event.addListener(map, "click", function(event){
-            this.setOptions({scrollwheel:true})
+            this.setOptions({scrollwheel:true});
+        });
+        directionsService = new google.maps.DirectionsService();
+        directionsRenderer= new google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(map);
+
+        sourceAutocomplete = new google.maps.places.AutoComplete(
+            document.getElementById('source')
+        );
+        destAutocomplete = new google.maps.places.AutoComplete(
+            document.getElementById('dest')
+        );
+    }
+
+    var marker = new google.maps.Marker({position: myCenter})
+    marker.setMap(map);
+    
+    function calcRoute(){
+        var source = document.getElementById('source').value
+        var dest = document.getElementById('dest').value
+
+        let request ={
+            origin: source,
+            destination:dest,
+            travelMode:'DRIVING',
+        }
+
+        directionsService.route(request, function(result,status){
+            if(status=="OK"){
+                directionsRenderer.setDirections(result)
+            }
         })
     }
 </script>
-</html>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXEHhwAGy7zxs0umICZldhBMxb9iCEclg&callback=myMap"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQ6jVr0lcexPTfwt4VoNh3lSq83ygfu_4&libraries=places"></script>
+</html> -->
