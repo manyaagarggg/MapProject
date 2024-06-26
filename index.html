@@ -25,15 +25,18 @@
 </html> -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL2lbrWFabdyfnxh3GEowbSkw62IRzRHk&callback=initMap&libraries=&v=weekly"
+        defer></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body onload="initMap()">
+<body >
     <h1 class="text-center">Directions Route Finder</h1>
     <br><br>
     <div class="container">
@@ -47,14 +50,12 @@
         <div id="map" style="height: 500px; width: 100%;"></div>
     </div>
 
-<script src="script.js">
+<script type="module" src="script.js">
     // let map, directionService, directionRenderer;
     // let sourceAutoComplete, desAutoComplete; 
     
 </script>
-<script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL2lbrWFabdyfnxh3GEowbSkw62IRzRHk&callback=initMap&libraries=&v=weekly"
-        defer></script>
+
     </body>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXEHhwAGy7zxs0umICZldhBMxb9iCEclg&callback=myMap"></script> -->
 
